@@ -15,6 +15,7 @@ class Piece
     # puts "color: #{color}, pos: #{pos}"
 
   end
+  
 
 
 
