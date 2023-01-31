@@ -12,9 +12,9 @@ class Employee
         self.salary * multi
     end
 
+    attr_reader :name
     protected
-    attr_accessor :title, :salary, :boss, :name
-
+    attr_accessor :title, :salary, :boss
 end
 
 class Manager < Employee
@@ -27,7 +27,19 @@ class Manager < Employee
 
     end
 
-    protected
+    def add_employee(employee)
+        self.employees << employee
+    end
+
+    def bonus(multi)
+        total_subsalary = 0
+        employees.each do |employee|
+            total_subsalary += employee.salary
+        end
+
+        total_subsalary * multi
+    end
+
+    # protected
     attr_accessor :employees, :name, :title, :salary, :boss
-    
 end
