@@ -23,7 +23,8 @@ module Slideable
   def diagonal_dirs
     return DIAGONAL_DIRS
   end
-  
+
+  private
   def move_dirs
     raise ArgumentError.new("NOT IMPLEMENTED PROPERLY")
   end
@@ -58,6 +59,8 @@ module Slideable
     return true if piece_instance.color != self.color && piece_instance.color != nil
     false
   end
+  
+  public
 
   def moves
 
@@ -80,10 +83,12 @@ end
 
 module Stepable
 
+  private
   def move_diffs
     raise ArgumentError.new("NOT IMPLEMENTED PROPERLY")
   end
 
+  public
   # ALL_DIRS = [
   #   [0,1],
   #   [1,0],
