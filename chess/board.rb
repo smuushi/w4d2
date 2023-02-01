@@ -1,5 +1,12 @@
 require_relative 'pieces/piece'
 require_relative 'pieces/nullpiece.rb'
+require_relative 'pieces/king'
+require_relative 'pieces/knight'
+require_relative 'pieces/move_mods'
+require_relative 'pieces/queen'
+require_relative 'pieces/rook'
+require_relative 'pieces/bishop'
+
 
 class Board
 
@@ -24,6 +31,9 @@ class Board
   def initialize
     @rows = self.make_board  # 2-d array with nils in rows 2..5
 
+  end
+
+  def make_pawns
     
   end
 
