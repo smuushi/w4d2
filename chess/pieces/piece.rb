@@ -11,7 +11,7 @@ class Piece
 
   def to_s 
 
-    "#{self.symbol}"
+    self.symbol
   end
   
   
