@@ -1,19 +1,28 @@
-require_relative 'pieces'
+require_relative 'pieces/piece'
+require_relative 'pieces/nullpiece.rb'
 
 class Board
 
-  def self.make_board
-    grid = Array.new(8) {Array.new(8) {Piece.new}}
+  def make_board
+    grid = Array.new(8) {Array.new(8)}
     
+    grid[0..1].each do |row|
+      row.each_index { |i| row[i] = Piece.new(:white, self, [0,0])}
+    end
+
     grid[2..5].each do |row|
-      row.each_index { |i| row[i] = nil }
+      row.each_index { |i| row[i] = NullPiece.instance }
+    end
+
+    grid[6..7].each do |row|
+      row.each_index { |i| row[i] = Piece.new(:black, self, [0,0])}
     end
 
     return grid
   end
 
   def initialize
-    @rows = Board.make_board  # 2-d array with nils in rows 2..5
+    @rows = self.make_board  # 2-d array with nils in rows 2..5
   end
 
   def [](pos)

@@ -1,4 +1,4 @@
-require 'Singleton'
+require 'singleton'
 
 module Slideable
 
@@ -64,6 +64,18 @@ module Slideable
   def capturable?(piece_instance)
     return true if piece_instance.color != self.color
     false
+  end
+
+  def moves
+
+    ostensible_moves = []
+
+    move_dirs.each do |direction|
+      ostensible_moves += grow_unblocked_moves_in_dir(direction)
+    end
+
+    return ostensible_moves
+
   end
 
 end
