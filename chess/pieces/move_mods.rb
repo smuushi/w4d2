@@ -1,3 +1,5 @@
+require 'Singleton'
+
 module Slideable
 
   HORIZONTAL_DIRS = [
@@ -49,10 +51,19 @@ module Slideable
       next_col += dy
     end
 
-    
+    next_piece = self.board[next_row, next_col]
+
+    if capturable?(next_piece)
+      unblocked_moves << [next_row, next_col]
+    end
 
 
     return unblocked_moves 
+  end
+
+  def capturable?(piece_instance)
+    return true if piece_instance.color != self.color
+    false
   end
 
 end
@@ -64,4 +75,15 @@ end
 
 module Stepable
 
+end
+
+
+class Test
+  include Singleton
+  
+  
+
+  def color
+    @color
+  end
 end
