@@ -11,8 +11,7 @@ class Piece
 
   def to_s 
 
-    # puts "color: #{color}, pos: #{pos}"
-
+    "#{self.symbol}"
   end
   
   

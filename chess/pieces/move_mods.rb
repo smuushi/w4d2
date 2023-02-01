@@ -7,14 +7,14 @@ module Slideable
     [1,0],
     [-1,0],
     [0,-1]
-  ]
+].freeze
 
   DIAGONAL_DIRS = [
     [1,1],
     [-1,1],
     [1,-1],
     [-1,-1]
-  ]
+].freeze
 
   def horizontal_dirs 
     return HORIZONTAL_DIRS
@@ -29,13 +29,6 @@ module Slideable
   end
 
   def grow_unblocked_moves_in_dir(pos_diff)
-    # base case: return self.pos if self.pos + pos_diff == friendly piece
-    # base 2: return self.pos if self.pos + pos_diff == OOB
-    # base 3: return self.pos + pos_diff if self.pos + pos_diff == enemy piece
-
-    # create unblocked_moves array = nested array starting with one ele of self.pos
-
-    # shovel the recursive call of unblocked_moves[-1].grow_unblocked_moves_in_dir(pos_diff) to holder array
     unblocked_moves = []
     current_row, current_col = self.pos
 
@@ -62,7 +55,7 @@ module Slideable
   end
 
   def capturable?(piece_instance)
-    return true if piece_instance.color != self.color
+    return true if piece_instance.color != self.color && piece_instance.color != nil
     false
   end
 
@@ -87,15 +80,55 @@ end
 
 module Stepable
 
-end
-
-
-class Test
-  include Singleton
-  
-  
-
-  def color
-    @color
+  def move_diffs
+    raise ArgumentError.new("NOT IMPLEMENTED PROPERLY")
   end
+
+  # ALL_DIRS = [
+  #   [0,1],
+  #   [1,0],
+  #   [-1,0],
+  #   [0,-1],
+  #   [1,1],
+  #   [-1,1],
+  #   [1,-1],
+  #   [-1,-1]
+  # ]
+
+  def moves
+    ostensible_moves = []
+
+    move_diffs.each do |move|
+      next_pos = self.pos.dup
+      next_pos[0] += move[0]
+      next_pos[1] += move[1]
+      
+      if self.board[next_pos] == NullPiece.instance
+        ostensible_moves << next_pos
+      end
+
+      if capturable?(self.board[next_pos])
+        ostensible_moves << next_pos
+      end
+
+      ostensible_moves
+    end
+  end
+
+  def capturable?(piece_instance)
+    return true if piece_instance.color != self.color && piece_instance.color != nil
+    false
+  end
+
 end
+
+
+# class Test
+#   include Singleton
+  
+
+
+#   def color
+#     @color
+#   end
+# end
