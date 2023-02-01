@@ -34,6 +34,25 @@ module Slideable
     # create unblocked_moves array = nested array starting with one ele of self.pos
 
     # shovel the recursive call of unblocked_moves[-1].grow_unblocked_moves_in_dir(pos_diff) to holder array
+    unblocked_moves = []
+    current_row, current_col = self.pos
+
+    dx, dy = pos_diff
+
+    next_row, next_col = current_row + dx, current_col + dy
+
+
+    while self.board[next_row, next_col] == NullPiece.instance
+      unblocked_moves << [next_row, next_col]
+
+      next_row += dx
+      next_col += dy
+    end
+
+    
+
+
+    return unblocked_moves 
   end
 
 end
