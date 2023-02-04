@@ -36,14 +36,19 @@ class Board
   end
 
   def make_pawns_1
-    @grid[1].each_index { |col| @grid[1, col] = Pawn.new(:white, self, [1, col])}
+    @grid[1].each_index do |col| 
+      new_pawn = Pawn.new(:white, self, [1, col])
+      self.[]=([1,col],new_pawn)
+    end
   end
   def make_pawns_2
-    @grid[6].each_index { |col| @grid[6, col] = Pawn.new(:black, self, [6, col])}
+    @grid[6].each_index do |col|
+      new_pawn = Pawn.new(:black, self, [6,col]) 
+      self.[]=([6,col], new_pawn)
+    end
   end
 
-  def [](pos)
-    row, col = pos[0], pos[1]
+  def [](row,col)
     return @grid[row][col]
   end
 
