@@ -11,6 +11,8 @@ require_relative "pieces/pawn"
 
 class Board
 
+  attr_reader :grid
+
   def make_board
     grid = Array.new(8) {Array.new(8) {NullPiece.instance}}
    
